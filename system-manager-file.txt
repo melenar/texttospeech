@@ -1,0 +1,13 @@
+dnf install httpd -y
+dnf install mod_ssl -y
+systemctl enable httpd 
+systemctl start httpd
+pip install cgi
+pip install boto3
+cd /var/www/html
+echo "<html><form method="GET" action="http://54.211.24.87/cgi-bin/method.py">Enter your Text<br/><input name="t"><input type="submit"></html>"
+wget https://github.com/melenar/texttospeech/archive/refs/heads/main.zip
+unzip main.zip 
+mv /root/texttospeech-main/app.py /var/www/cgi-bin/method.py
+cd /var/www/cgi-bin
+chmod +x method.py
