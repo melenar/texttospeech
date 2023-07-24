@@ -19,10 +19,7 @@ def send_email(email_ids, msg_body):
 def lambda_handler(event, context):
     s3 = boto3.client('s3')
 
-    s3_bucket = event['Records'][0]['s3']['bucket']['name']
-    file_name = event['Records'][0]['s3']['object']['key']
-
-    response = s3.get_object(Bucket=s3_bucket, Key=file_name)
+    response = s3.get_object(Bucket='apologymessagestorage', Key='message.txt')
     msg_body = response['Body'].read().decode('utf-8')
 
     response = s3.get_object(Bucket='mailinglistforfinalproject', Key='mailer.txt')
